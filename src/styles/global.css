@@ -4,39 +4,51 @@
 
 @layer base {
   html {
-    background-color: #0C0C0E;
-    color: #D4D4D8;
+    background-color: #0B0C0E;
+    color: #A1A1AA;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   body {
-    background-color: #0C0C0E;
+    background-color: #0B0C0E;
     margin: 0;
   }
 
   ::selection {
     background-color: #F4F4F5;
-    color: #0C0C0E;
+    color: #0B0C0E;
   }
-}
 
-/* Waving hand on heading hover */
-.wave {
-  display: inline-block;
-  transform-origin: 70% 70%;
-}
-h1:hover .wave {
-  animation: wave 1.2s ease-in-out;
-}
-@keyframes wave {
-  0%, 100% { transform: rotate(0deg); }
-  15% { transform: rotate(14deg); }
-  30% { transform: rotate(-8deg); }
-  45% { transform: rotate(14deg); }
-  60% { transform: rotate(-4deg); }
-  75% { transform: rotate(10deg); }
+  button,
+  [role='button'],
+  [data-click] {
+    cursor: pointer;
+    transition:
+      transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+      color 0.3s ease,
+      background-color 0.3s ease,
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  button:active:not(:disabled),
+  [role='button']:active,
+  [data-click]:active {
+    transform: scale(0.97);
+    transition-duration: 70ms;
+    transition-timing-function: ease-out;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid rgba(244, 244, 245, 0.75);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
 }
 
 /* Vinyl record */
@@ -45,7 +57,7 @@ h1:hover .wave {
     conic-gradient(from 0deg, transparent 0 18%, rgba(255, 255, 255, 0.08) 24%, transparent 30% 68%, rgba(255, 255, 255, 0.06) 74%, transparent 80%),
     repeating-radial-gradient(circle at center, #1a1a1e 0 1px, #0b0b0d 1px 2.5px);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07);
-  animation: vinyl-spin 2.8s linear infinite;
+  animation: vinyl-spin 8s linear infinite;
   animation-play-state: paused;
 }
 .is-playing .vinyl {
@@ -66,7 +78,7 @@ h1:hover .wave {
   );
 }
 
-/* 3-bar equalizer */
+/* 4-bar equalizer */
 .eq-bar {
   height: 3px;
   transition: height 0.2s ease;
@@ -75,22 +87,36 @@ h1:hover .wave {
   animation: eq-bounce 0.85s ease-in-out infinite alternate;
 }
 .is-playing .eq-bar:nth-child(2) {
-  animation-duration: 0.6s;
+  animation-duration: 0.58s;
   animation-delay: -0.25s;
 }
 .is-playing .eq-bar:nth-child(3) {
   animation-duration: 0.72s;
   animation-delay: -0.45s;
 }
+.is-playing .eq-bar:nth-child(4) {
+  animation-duration: 0.64s;
+  animation-delay: -0.15s;
+}
 @keyframes eq-bounce {
   0% { height: 3px; }
   100% { height: 11px; }
 }
 
+/* Signal Composer typewriter subtle pulse */
+#composer-input.is-typing {
+  animation: composer-type-pulse 180ms ease-in-out infinite alternate;
+}
+@keyframes composer-type-pulse {
+  from { opacity: 0.86; }
+  to { opacity: 1; }
+}
+
 /* Pixel canvas */
 .pixelated {
-  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
+  image-rendering: pixelated;
 }
 
 /* Range slider */
@@ -123,28 +149,28 @@ h1:hover .wave {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .vinyl, .is-playing .eq-bar, .aurora-blob, h1:hover .wave { animation: none; }
+  .vinyl, .is-playing .eq-bar, .aurora-blob { animation: none; }
 }
 
 /* Matte SVG noise overlay */
 .bg-noise {
-  opacity: 0.04;
+  opacity: 0.025;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Whisper-soft cursor spotlight + minimal top sheen */
+/* Soft top studio glow + whisper-soft cursor spotlight */
 .bg-spotlight {
   background:
+    radial-gradient(
+      ellipse 80% 40% at 50% -10%,
+      rgba(255, 255, 255, 0.06),
+      transparent
+    ),
     radial-gradient(
       700px circle at var(--mx, 50%) var(--my, 25%),
       rgba(255, 255, 255, 0.015) 0%,
       rgba(244, 244, 245, 0.006) 35%,
       transparent 75%
-    ),
-    radial-gradient(
-      ellipse 75% 35% at 50% 0%,
-      rgba(255, 255, 255, 0.012) 0%,
-      transparent 100%
     );
 }
 
@@ -168,4 +194,493 @@ h1:hover .wave {
   0% { transform: translate3d(0, 0, 0) scale(1); }
   50% { transform: translate3d(18px, -14px, 0) scale(1.08); }
   100% { transform: translate3d(-14px, 12px, 0) scale(0.96); }
+}
+
+/* Secret OK Computer CRT mode (1997 cold cyan/emerald aesthetic) */
+.crt-scanlines {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(56, 189, 248, 0.045) 0px,
+    rgba(56, 189, 248, 0.045) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  overflow: hidden;
+}
+.crt-scanlines::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -12%;
+  height: 64px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(186, 230, 253, 0.03) 50%,
+    transparent
+  );
+  animation: crt-sweep 6.5s linear infinite;
+}
+@keyframes crt-sweep {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(125vh); }
+}
+.crt-glitch-noise {
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(103, 232, 249, 0.14) 0px,
+      rgba(103, 232, 249, 0.14) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  animation: crt-glitch-shift 120ms steps(2) infinite;
+}
+@keyframes crt-glitch-shift {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(-2px, 1px, 0); }
+  100% { transform: translate3d(2px, -1px, 0); }
+}
+html,
+body {
+  transition: background-color 400ms ease, color 400ms ease;
+}
+.ok-computer-mode,
+.ok-computer-mode body {
+  background-color: #090d16 !important;
+}
+.ok-computer-mode .crt-scanlines {
+  opacity: var(--crt-scan-opacity, 1);
+}
+/* The Designers Republic (1997) sharp geometry & ice-blue accents */
+.ok-computer-mode #player,
+.ok-computer-mode #pixel-widget,
+.ok-computer-mode #log-sanitizer,
+.ok-computer-mode #signal-composer,
+.ok-computer-mode #pixel-stage,
+.ok-computer-mode #log-terminal,
+.ok-computer-mode #composer-input,
+.ok-computer-mode canvas,
+.ok-computer-mode button,
+.ok-computer-mode kbd,
+.ok-computer-mode aside,
+.ok-computer-mode pre {
+  border-radius: 0 !important;
+}
+.ok-computer-mode #player,
+.ok-computer-mode #pixel-widget,
+.ok-computer-mode #log-sanitizer,
+.ok-computer-mode #signal-composer {
+  border-color: rgba(56, 189, 248, 0.38) !important;
+  border-top-color: rgba(125, 211, 252, 0.65) !important;
+}
+.ok-computer-mode #composer-input {
+  border-color: rgba(56, 189, 248, 0.34) !important;
+  color: #bae6fd !important;
+}
+.ok-computer-mode h1,
+.ok-computer-mode h2 {
+  color: #e0f2fe !important;
+}
+.ok-computer-mode body,
+.ok-computer-mode p,
+.ok-computer-mode span,
+.ok-computer-mode a,
+.ok-computer-mode button,
+.ok-computer-mode time,
+.ok-computer-mode kbd,
+.ok-computer-mode code,
+.ok-computer-mode pre {
+  color: #38bdf8 !important;
+  border-color: rgba(56, 189, 248, 0.34);
+}
+.ok-computer-mode a.bg-zinc-100,
+.ok-computer-mode button.bg-zinc-100,
+.ok-computer-mode button[aria-pressed='true'].bg-zinc-100 {
+  background-color: rgba(56, 189, 248, 0.16) !important;
+  border: 1px solid #38bdf8 !important;
+  color: #bae6fd !important;
+}
+.ok-computer-mode #progress-bar {
+  background-color: #38bdf8 !important;
+}
+.ok-computer-mode #filter-canvas {
+  opacity: 0;
+}
+.ok-computer-mode #ostrava-canvas,
+.ok-computer-mode #dov-caption {
+  opacity: 1;
+}
+.ok-computer-mode ::selection {
+  background-color: #38bdf8;
+  color: #060913;
+}
+
+/* Secret Silent Hill: Otherworld Mode (Ostrava-Poruba fog & falling ash) */
+.otherworld-vignette {
+  background: radial-gradient(
+    ellipse 80% 75% at 50% 45%,
+    rgba(24, 24, 27, 0.05) 35%,
+    rgba(9, 9, 11, 0.72) 100%
+  );
+}
+.sh-fog-veil {
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(212, 212, 216, 0.22) 0%,
+    rgba(63, 63, 70, 0.35) 55%,
+    rgba(24, 24, 27, 0.65) 100%
+  );
+}
+.ash-flake {
+  top: -8px;
+  animation-name: ash-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+.otherworld-mode .ash-flake {
+  animation-play-state: running;
+}
+@keyframes ash-fall {
+  0% {
+    transform: translate3d(0, -10px, 0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.28;
+  }
+  35% {
+    transform: translate3d(16px, 34vh, 0);
+  }
+  68% {
+    transform: translate3d(-14px, 68vh, 0);
+  }
+  88% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: translate3d(6px, 105vh, 0);
+    opacity: 0;
+  }
+}
+.otherworld-mode #bg-sh-fog {
+  opacity: 1;
+}
+.sh-edge-fog {
+  background: radial-gradient(
+    circle at 50% 45%,
+    transparent 32%,
+    rgba(69, 10, 10, 0.22) 78%,
+    rgba(24, 24, 27, 0.45) 100%
+  );
+  animation: sh-fog-pulse 8s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+.otherworld-mode .sh-edge-fog {
+  animation-play-state: running;
+}
+@keyframes sh-fog-pulse {
+  0% { opacity: 0.7; transform: scale(1); }
+  100% { opacity: 1; transform: scale(1.04); }
+}
+.otherworld-mode #player,
+.otherworld-mode #pixel-widget,
+.otherworld-mode #log-sanitizer,
+.otherworld-mode #signal-composer,
+.ok-computer-mode #player,
+.ok-computer-mode #pixel-widget,
+.ok-computer-mode #log-sanitizer,
+.ok-computer-mode #signal-composer,
+.p4-mode #player,
+.p4-mode #pixel-widget,
+.p4-mode #log-sanitizer,
+.p4-mode #signal-composer {
+  background-color: rgba(9, 9, 11, 0.75) !important;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.sh-fog-watcher {
+  will-change: transform, opacity;
+  animation: sh-walk-across 40s linear infinite;
+  animation-play-state: paused;
+}
+.sh-fog-watcher-svg {
+  filter: blur(0.8px) drop-shadow(0 0 22px rgba(148, 163, 184, 0.22));
+}
+#sh-leg-back {
+  transform-origin: 155px 310px;
+  animation: sh-step-back 2.4s ease-in-out infinite;
+  animation-play-state: paused;
+}
+#sh-leg-front {
+  transform-origin: 165px 310px;
+  animation: sh-step-front 2.4s ease-in-out infinite;
+  animation-play-state: paused;
+}
+#sh-torso {
+  transform-origin: 160px 310px;
+  animation: sh-torso-limp 2.4s ease-in-out infinite;
+  animation-play-state: paused;
+}
+#sh-head {
+  transform-origin: 192px 135px;
+  animation: sh-head-nod 2.4s ease-in-out infinite;
+  animation-delay: -0.35s;
+  animation-play-state: paused;
+}
+.otherworld-mode .sh-fog-watcher,
+.otherworld-mode #sh-leg-back,
+.otherworld-mode #sh-leg-front,
+.otherworld-mode #sh-torso,
+.otherworld-mode #sh-head {
+  animation-play-state: running;
+}
+@keyframes sh-walk-across {
+  0% {
+    transform: translateX(-320px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100vw);
+    opacity: 0;
+  }
+}
+@keyframes sh-step-front {
+  0%, 100% { transform: rotate(-14deg); }
+  50% { transform: rotate(16deg); }
+}
+@keyframes sh-step-back {
+  0%, 100% { transform: rotate(16deg); }
+  50% { transform: rotate(-14deg); }
+}
+@keyframes sh-torso-limp {
+  0%, 100% { transform: translateY(0px) rotate(2deg); }
+  45% { transform: translateY(7px) rotate(7deg); }
+}
+@keyframes sh-head-nod {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(8deg); }
+}
+
+#p4-secret-indicator:hover .p4-dot {
+  animation: p4-dot-blink 0.65s ease-in-out infinite;
+}
+#p4-secret-indicator:hover .p4-glitch-label {
+  display: inline-block;
+  animation: p4-label-jitter 0.4s steps(2) infinite;
+}
+@keyframes p4-dot-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+@keyframes p4-label-jitter {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0.5px, -0.5px, 0); }
+}
+
+/* OK Computer z-0 telemetry background */
+.ok-computer-mode #bg-ok-telemetry {
+  opacity: 1;
+}
+.ok-grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+.ok-top-glow {
+  background: radial-gradient(ellipse 80% 38% at 50% 0%, rgba(56, 189, 248, 0.07), transparent);
+}
+.ok-scanner-line {
+  top: -4px;
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.22), transparent);
+  animation: ok-scan-down 9s linear infinite;
+  animation-play-state: paused;
+}
+.ok-computer-mode .ok-scanner-line {
+  animation-play-state: running;
+}
+@keyframes ok-scan-down {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(102vh); }
+}
+.otherworld-mode main {
+  opacity: 0.9;
+}
+.otherworld-mode h1,
+.otherworld-mode h2,
+.otherworld-mode h3 {
+  color: #d4d4d8 !important;
+  text-shadow: 0 0 8px rgba(161, 161, 170, 0.15);
+}
+.otherworld-mode p,
+.otherworld-mode span,
+.otherworld-mode a {
+  color: #a1a1aa;
+}
+.otherworld-mode #progress-bar {
+  background-color: #b45309 !important;
+}
+.otherworld-mode #player,
+.otherworld-mode #pixel-widget,
+.otherworld-mode #log-sanitizer,
+.otherworld-mode #signal-composer {
+  border-color: rgba(185, 28, 28, 0.28) !important;
+  border-top-color: rgba(217, 119, 6, 0.35) !important;
+}
+.otherworld-mode #composer-input {
+  border-color: rgba(180, 83, 9, 0.32) !important;
+}
+.otherworld-mode #filter-canvas {
+  opacity: 0;
+}
+.otherworld-mode #poruba-canvas,
+.otherworld-mode #poruba-caption {
+  opacity: 1;
+}
+.otherworld-mode #vinyl-disc {
+  filter: grayscale(1) contrast(1.25) brightness(0.78);
+}
+
+/* Secret Persona 4: Midnight Channel mode (#FACC15 TV World) */
+.p4-tv-noise {
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(9, 9, 11, 0.85) 0px,
+      rgba(9, 9, 11, 0.85) 2px,
+      rgba(250, 204, 21, 0.88) 2px,
+      rgba(250, 204, 21, 0.88) 4px
+    );
+}
+.p4-mode,
+.p4-mode body {
+  background-color: #111009 !important;
+}
+.p4-mode #p4-hud {
+  display: flex;
+}
+.p4-mode #player,
+.p4-mode #pixel-widget,
+.p4-mode #log-sanitizer,
+.p4-mode #signal-composer {
+  border: 2px solid #facc15 !important;
+  box-shadow: 0 0 0 2px #09090b, 3px 3px 0 #facc15 !important;
+}
+.p4-mode button:not(#p4-exit-btn),
+.p4-mode [data-composer-preset] {
+  border-color: rgba(250, 204, 21, 0.7) !important;
+  box-shadow: 0 0 0 1px #09090b, 2px 2px 0 rgba(250, 204, 21, 0.55) !important;
+}
+.p4-mode #composer-input {
+  border: 2px solid rgba(250, 204, 21, 0.6) !important;
+}
+.p4-mode #progress-bar {
+  background-color: #facc15 !important;
+}
+.p4-mode button.bg-zinc-100,
+.p4-mode button[aria-pressed='true'].bg-zinc-100 {
+  background-color: #facc15 !important;
+  color: #09090b !important;
+}
+.p4-mode button[aria-pressed='true']:not(.bg-zinc-100) {
+  border-color: rgba(250, 204, 21, 0.65) !important;
+  color: #fde047 !important;
+}
+.p4-mode #filter-canvas {
+  opacity: 0;
+}
+.p4-mode #radnice-canvas,
+.p4-mode #radnice-caption {
+  opacity: 1;
+}
+
+/* Persona 4 z-0 TV World background */
+.p4-mode #bg-p4-tvworld {
+  opacity: 1;
+}
+.p4-edge-haze {
+  background: radial-gradient(circle at 50% 45%, transparent 45%, rgba(250, 204, 21, 0.08) 100%);
+  animation: p4-haze-breathe 6s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+.p4-mode .p4-edge-haze {
+  animation-play-state: running;
+}
+@keyframes p4-haze-breathe {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+.p4-stripe-rail {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #facc15 0px,
+    #facc15 12px,
+    transparent 12px,
+    transparent 24px
+  );
+  background-size: 34px 34px;
+  animation: p4-stripe-scroll 2.2s linear infinite;
+  animation-play-state: paused;
+}
+.p4-stripe-right {
+  animation-direction: reverse;
+}
+.p4-mode .p4-stripe-rail {
+  animation-play-state: running;
+}
+@keyframes p4-stripe-scroll {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 34px; }
+}
+.p4-tv-float {
+  animation-name: p4-tv-drift;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-play-state: paused;
+}
+.p4-mode .p4-tv-float {
+  animation-play-state: running;
+}
+@keyframes p4-tv-drift {
+  0% { transform: translate3d(0, 0, 0) rotate(-3deg); }
+  100% { transform: translate3d(10px, -18px, 0) rotate(4deg); }
+}
+.p4-detective {
+  filter: drop-shadow(0 0 12px rgba(250, 204, 21, 0.35));
+  animation: p4-detective-sway 7s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.p4-mode .p4-detective {
+  animation-play-state: running;
+}
+@keyframes p4-detective-sway {
+  0%, 92%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  45% { transform: translate3d(-3px, 2px, 0) rotate(-0.6deg); }
+  94% { transform: translate3d(4px, 0, 0); }
+  96% { transform: translate3d(-4px, 0, 0); }
+}
+.p4-eye-pulse {
+  animation: p4-eye-glow 2.4s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+.p4-mode .p4-eye-pulse {
+  animation-play-state: running;
+}
+@keyframes p4-eye-glow {
+  0% { opacity: 0.45; }
+  100% { opacity: 1; }
+}
+.p4-mode footer {
+  padding-bottom: 7rem;
 }
