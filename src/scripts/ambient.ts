@@ -1,7 +1,11 @@
-// Smoothly tracks pointer position for the 600px radial spotlight.
+// Smoothly tracks pointer position for the subtle radial spotlight.
 export function initSpotlight() {
   const el = document.getElementById('spotlight');
   if (!el) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
 
   let targetX = window.innerWidth * 0.5;
   let targetY = window.innerHeight * 0.25;
