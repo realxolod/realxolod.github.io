@@ -6,11 +6,19 @@ const EMAIL_CODES = [
   75, 67, 78, 75, 88, 72, 79, 65, 4, 89, 75, 76, 75, 88, 69, 92, 106, 77, 71, 75, 67, 70, 4, 73, 69, 71,
 ];
 const TG_CODES = [
-  66, 94, 94, 90, 89, 16, 5, 5, 94, 4, 71, 79,
+  66, 94, 94, 90, 89, 16, 5, 5, 94, 4, 71, 79, 5, 80, 75, 91, 95, 75, 88, 27,
 ];
 
 function decode(codes: number[]): string {
   return String.fromCharCode(...codes.map((c) => c ^ KEY));
+}
+
+export function decodeEmail(): string {
+  return decode(EMAIL_CODES);
+}
+
+export function decodeTelegramUrl(): string {
+  return decode(TG_CODES);
 }
 
 export function initContacts() {
@@ -25,7 +33,7 @@ export function initContacts() {
     });
   }
 
-  if (copyEmailBtn && toast) {
+  if (copyEmailBtn) {
     let hideTimer: number | undefined;
 
     copyEmailBtn.addEventListener('click', async () => {
@@ -33,7 +41,6 @@ export function initContacts() {
       try {
         await navigator.clipboard.writeText(address);
       } catch {
-        // Fallback for restricted clipboard contexts
         const tmp = document.createElement('textarea');
         tmp.value = address;
         tmp.setAttribute('readonly', '');
@@ -45,13 +52,22 @@ export function initContacts() {
         document.body.removeChild(tmp);
       }
 
-      toast.classList.remove('opacity-0', 'translate-y-1', 'pointer-events-none');
-      toast.classList.add('opacity-100', 'translate-y-0');
+      const prevText = copyEmailBtn.textContent === 'Copied' ? 'Copy Email' : copyEmailBtn.textContent;
+      copyEmailBtn.textContent = 'Copied';
+      console.log('> handshake_init: email copied');
+
+      if (toast) {
+        toast.classList.remove('opacity-0', 'translate-y-1', 'pointer-events-none');
+        toast.classList.add('opacity-100', 'translate-y-0');
+      }
 
       window.clearTimeout(hideTimer);
       hideTimer = window.setTimeout(() => {
-        toast.classList.add('opacity-0', 'translate-y-1', 'pointer-events-none');
-        toast.classList.remove('opacity-100', 'translate-y-0');
+        copyEmailBtn.textContent = prevText || 'Copy Email';
+        if (toast) {
+          toast.classList.add('opacity-0', 'translate-y-1', 'pointer-events-none');
+          toast.classList.remove('opacity-100', 'translate-y-0');
+        }
       }, 2000);
     });
   }
