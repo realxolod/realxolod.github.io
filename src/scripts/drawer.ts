@@ -7,7 +7,7 @@ interface ProjectPayload {
   description: string;
   detailLabel: string;
   detailLines: string[];
-  github: string;
+  github?: string;
 }
 
 export function initDrawerAndShortcuts() {
@@ -21,6 +21,7 @@ export function initDrawerAndShortcuts() {
   const detailLabelEl = document.getElementById('drawer-detail-label');
   const detailLinesEl = document.getElementById('drawer-detail-lines');
   const githubEl = document.getElementById('drawer-github') as HTMLAnchorElement | null;
+  const privateNoteEl = document.getElementById('drawer-private-note');
 
   const triggers = Array.from(document.querySelectorAll<HTMLElement>('[data-project-trigger]'));
   let lastTrigger: HTMLElement | null = null;
@@ -61,9 +62,8 @@ export function initDrawerAndShortcuts() {
     const liveDesc = trigger.querySelector<HTMLElement>('[data-i18n^="proj."]');
     descEl.textContent = liveDesc?.textContent?.trim() || data.description;
 
-    const liveStatus = trigger.querySelector<HTMLElement>('[data-i18n="statusInProgress"]');
     if (data.status) {
-      statusEl.textContent = liveStatus?.textContent?.trim() || `[${data.status}]`;
+      statusEl.textContent = `[${data.status}]`;
       statusEl.classList.remove('hidden');
     } else {
       statusEl.classList.add('hidden');
@@ -78,7 +78,17 @@ export function initDrawerAndShortcuts() {
       detailLinesEl.appendChild(code);
     });
 
-    githubEl.href = data.github;
+    if (data.github) {
+      githubEl.href = data.github;
+      githubEl.classList.remove('hidden');
+      privateNoteEl?.classList.add('hidden');
+    } else {
+      githubEl.classList.add('hidden');
+      if (privateNoteEl) {
+        privateNoteEl.textContent = data.status ?? 'Internal / Academic Case';
+        privateNoteEl.classList.remove('hidden');
+      }
+    }
 
     backdrop.classList.remove('pointer-events-none', 'opacity-0');
     backdrop.classList.add('opacity-100');

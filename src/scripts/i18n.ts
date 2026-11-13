@@ -18,16 +18,13 @@ const DICT: Record<Lang, Record<string, string>> = {
     filterGrayscale: 'Grayscale',
     filterBlur: 'Box Blur',
     projects: 'Projects',
-    statusInProgress: '[In progress]',
     viewGitHub: 'View on GitHub ↗',
-    'proj.attendance-analytics':
-      'Parses raw turnstile CSV logs, flags missing check-outs, and sums worked hours.',
-    'proj.raster-image-processor':
-      'Reads uncompressed BMP/PPM images in memory with custom grayscale and box blur filters.',
-    'proj.car-rental-db':
-      '3NF relational database with automated invoicing queries and user forms.',
-    'proj.corporate-financial-kpi':
-      'Spreadsheet audit of P&L, cash flow, liquidity (1.84x), and ROE/ROA.',
+    'proj.opsec-portfolio-canvas':
+      'Custom 60 FPS canvas engine with privacy-first Umami analytics and strict CSP.',
+    'proj.etl-data-cleaning-pipeline':
+      'Deduplication, date normalization, and validation pipeline for raw attendance CSV logs (RAW CSV -> DEDUP & VALIDATION -> CLEAN KPI).',
+    'proj.relational-db-financial-analysis':
+      'Normalized 3NF relational schema design and corporate financial stability analysis (ROE, ROA, liquidity).',
     stackLabel: 'Stack:',
     nowLabel: 'Now:',
     now1: 'Year 2, Informatics in Economics at VŠB-TUO',
@@ -50,16 +47,13 @@ const DICT: Record<Lang, Record<string, string>> = {
     filterGrayscale: 'Odstíny šedi',
     filterBlur: 'Box Blur',
     projects: 'Projekty',
-    statusInProgress: '[Probíhá]',
     viewGitHub: 'Otevřít na GitHubu ↗',
-    'proj.attendance-analytics':
-      'Zpracovává surové CSV logy z turniketů, hledá chybějící odchody a počítá odpracované hodiny.',
-    'proj.raster-image-processor':
-      'Zpracování nekomprimovaných BMP/PPM obrázků v paměti pomocí vlastních filtrů grayscale a box blur.',
-    'proj.car-rental-db':
-      'Relační databáze ve 3NF s automatizovanými SQL dotazy pro fakturaci a uživatelskými formuláři.',
-    'proj.corporate-financial-kpi':
-      'Analýza výkazu zisku a ztráty, cash flow, likvidity (1.84x) a ROE/ROA.',
+    'proj.opsec-portfolio-canvas':
+      'Vlastní 60 FPS canvas engine s privacy-first analytikou Umami a přísnou CSP politikou.',
+    'proj.etl-data-cleaning-pipeline':
+      'Pipeline pro deduplikaci, normalizaci dat a validaci surových CSV logů docházky (RAW CSV -> DEDUP & VALIDATION -> CLEAN KPI).',
+    'proj.relational-db-financial-analysis':
+      'Návrh relační databáze ve 3NF a finanční analýza stability podniku (ROE, ROA, likvidita).',
     stackLabel: 'Stack:',
     nowLabel: 'Teď:',
     now1: '2. ročník, Informatika v ekonomii na VŠB-TUO',
@@ -82,16 +76,13 @@ const DICT: Record<Lang, Record<string, string>> = {
     filterGrayscale: 'Ч/Б',
     filterBlur: 'Box Blur',
     projects: 'Проекты',
-    statusInProgress: '[В процессе]',
     viewGitHub: 'Открыть на GitHub ↗',
-    'proj.attendance-analytics':
-      'Разбирает сырые CSV-логи турникетов, находит пропущенные выходы и считает отработанные часы.',
-    'proj.raster-image-processor':
-      'Обработка несжатых BMP/PPM изображений в памяти с собственными фильтрами grayscale и box blur.',
-    'proj.car-rental-db':
-      'Реляционная БД в 3NF с автоматическими SQL-запросами для выставления счетов и формами.',
-    'proj.corporate-financial-kpi':
-      'Разбор отчётов P&L и cash flow, расчёт ликвидности (1.84x) и ROE/ROA.',
+    'proj.opsec-portfolio-canvas':
+      'Кастомный 60 FPS движок на Canvas с privacy-first аналитикой Umami и строгой политикой CSP.',
+    'proj.etl-data-cleaning-pipeline':
+      'Пайплайн дедупликации, нормализации дат и валидации сырых CSV-логов учета времени (RAW CSV -> DEDUP & VALIDATION -> CLEAN KPI).',
+    'proj.relational-db-financial-analysis':
+      'Проектирование нормализованной схемы БД (3NF) и финансовый анализ устойчивости предприятия (ROE, ROA, ликвидность).',
     stackLabel: 'Стек:',
     nowLabel: 'Сейчас:',
     now1: '2 курс, Информатика в экономике (VŠB-TUO)',

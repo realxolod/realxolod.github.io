@@ -748,18 +748,20 @@ const filters = [
                         ))}
                       </div>
                       {project.data.status && (
-                        <span data-i18n="statusInProgress" class="font-mono text-[11px] text-amber-400/90">[{project.data.status}]</span>
+                        <span class="font-mono text-[11px] text-amber-400/90">[{project.data.status}]</span>
                       )}
                     </div>
-                    <a
-                      href={project.data.github}
-                      target="_blank"
-                      rel="noopener noreferrer nofollow"
-                      data-click
-                      class="shrink-0 text-xs text-zinc-400 transition-all duration-300 hover:text-zinc-100"
-                    >
-                      GitHub ↗
-                    </a>
+                    {project.data.github && (
+                      <a
+                        href={project.data.github}
+                        target="_blank"
+                        rel="noopener noreferrer nofollow"
+                        data-click
+                        class="shrink-0 text-xs text-zinc-400 transition-all duration-300 hover:text-zinc-100"
+                      >
+                        GitHub ↗
+                      </a>
+                    )}
                   </div>
                   <p
                     data-i18n={`proj.${project.slug}`}
@@ -951,7 +953,7 @@ const filters = [
         <div class="flex items-center justify-between border-t border-zinc-800/80 pt-4">
           <a
             id="drawer-github"
-            href="https://github.com/realxolod?tab=repositories"
+            href="https://github.com/realxolod/realxolod.github.io"
             target="_blank"
             rel="noopener noreferrer nofollow"
             data-click
@@ -960,6 +962,7 @@ const filters = [
           >
             View on GitHub ↗
           </a>
+          <span id="drawer-private-note" class="hidden font-mono text-xs text-zinc-400"></span>
         </div>
       </aside>
     </div>
