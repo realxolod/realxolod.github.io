@@ -4,7 +4,7 @@ import '../styles/global.css';
 
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 
-const githubUrl = 'https://github.com';
+const githubUrl = 'https://github.com/realxolod';
 
 const stack = ['Python', 'SQL', 'C', 'Pandas', 'VBA', 'Excel', 'Financial Analysis', 'HTML/CSS'];
 const languages = [
@@ -29,16 +29,28 @@ const filters = [
     <meta name="googlebot" content="noindex, nofollow" />
     <meta name="referrer" content="no-referrer" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cloud.umami.is; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.mzstatic.com; media-src 'self' https://*.mzstatic.com https://*.itunes.apple.com; connect-src 'self' https://cloud.umami.is https://api-gateway.umami.dev https://itunes.apple.com; font-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self';"
+    />
     <title>Aidar S.</title>
     <meta
       name="description"
-      content="Aidar S. — Informatics in Economics student at VŠB-TUO. Python data pipelines, low-level C and business numbers."
+      content="Aidar S. - Informatics in Economics student at VŠB-TUO. Python, C, SQL, and financial analysis."
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {import.meta.env.PROD && (
+      <script
+        defer
+        src="https://cloud.umami.is/script.js"
+        data-website-id="bdb3834f-a7a9-4642-9982-3c9223c50cad"
+        data-do-not-track="true"
+      ></script>
+    )}
   </head>
   <body class="relative text-zinc-300 antialiased overflow-x-hidden">
     <!-- Ambient background layers -->
-    <div aria-hidden="true" class="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+    <div id="mode-bg-layer" aria-hidden="true" class="pointer-events-none fixed inset-0 z-[1] overflow-hidden">
       <!-- In Rainbows aurora (fades in when Radiohead is playing) -->
       <div
         id="aurora"
@@ -49,40 +61,258 @@ const filters = [
         <div class="aurora-blob aurora-blob-3 absolute bottom-[-10%] left-[28%] h-[400px] w-[400px] rounded-full bg-[#065F46] blur-3xl"></div>
       </div>
 
-      <!-- 600px cursor spotlight -->
+      <!-- 600px cursor spotlight & studio top glow -->
       <div id="spotlight" class="bg-spotlight absolute inset-0"></div>
 
       <!-- Matte SVG noise -->
       <div class="bg-noise absolute inset-0"></div>
+
+      <!-- Mode: OK Computer (Digital Telemetry) -->
+      <div
+        id="bg-ok-telemetry"
+        class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500"
+      >
+        <div class="ok-grid-bg absolute inset-0"></div>
+        <div class="ok-top-glow absolute inset-0"></div>
+        <div class="ok-scanner-line absolute left-0 right-0 h-[1px]"></div>
+        <!-- Minimalist urban interchange contours at edges -->
+        <svg viewBox="0 0 220 420" class="hidden lg:block absolute top-12 left-2 h-[65vh] w-48 stroke-sky-400/20 fill-none" stroke-width="1">
+          <path d="M 10 40 C 90 40, 60 160, 140 160 C 190 160, 160 280, 80 320" />
+          <path d="M 0 120 C 70 120, 120 200, 40 280" stroke-dasharray="4 4" />
+          <circle cx="96" cy="182" r="28" />
+          <circle cx="96" cy="182" r="6" class="fill-sky-400/20" />
+        </svg>
+        <svg viewBox="0 0 220 420" class="hidden lg:block absolute bottom-8 right-2 h-[60vh] w-48 stroke-sky-400/20 fill-none" stroke-width="1">
+          <path d="M 210 60 C 130 90, 160 210, 70 240 C 20 260, 60 360, 150 390" />
+          <path d="M 190 140 L 85 140 L 85 310" stroke-dasharray="3 5" />
+          <rect x="74" y="129" width="22" height="22" />
+        </svg>
+      </div>
+
+      <!-- Mode: Silent Hill (Ash, Fog & Silhouette) -->
+      <div
+        id="bg-sh-fog"
+        class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500"
+      >
+        <div class="sh-edge-fog absolute inset-0"></div>
+        <div class="otherworld-vignette absolute inset-0"></div>
+        <canvas
+          id="sh-ash-canvas"
+          class="pointer-events-none absolute inset-0 h-full w-full"
+        ></canvas>
+        <!-- Bottom-edge limping profile silhouette walking left-to-right -->
+        <div class="sh-fog-watcher fixed bottom-0 left-0 pointer-events-none">
+          <svg
+            viewBox="0 0 320 500"
+            class="sh-fog-watcher-svg block w-[220px] md:w-[300px] h-auto opacity-[0.12] md:opacity-[0.20]"
+            fill="none"
+          >
+            <g id="sh-leg-back">
+              <path d="M142,310 L132,415 L118,500 L142,500 L156,415 L168,310 Z" fill="#060608" />
+            </g>
+            <g id="sh-leg-front">
+              <path d="M152,310 L146,418 L138,500 L164,500 L174,415 L182,310 Z" fill="#09090b" />
+            </g>
+            <g id="sh-torso">
+              <path d="M132,315 C115,265 112,205 134,155 C148,125 178,118 202,135 C224,152 226,195 212,245 C200,285 186,312 162,318 Z" fill="#09090b" />
+              <path d="M158,150 C148,195 152,245 162,290" stroke="rgba(161, 161, 170, 0.14)" stroke-width="2" fill="none" stroke-linecap="round" />
+            </g>
+            <g id="sh-head">
+              <path d="M184,138 C184,108 204,88 226,96 C244,104 246,130 230,146 C218,156 196,152 184,138 Z" fill="#09090b" />
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Mode: Persona 4 (TV World Stripes, Drifting CRTs & Detective Silhouette) -->
+      <div
+        id="bg-p4-tvworld"
+        class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500"
+      >
+        <div class="p4-edge-haze absolute inset-0"></div>
+        <div class="p4-stripe-rail p4-stripe-left absolute top-0 bottom-0 left-0 w-[70px] opacity-[0.07]"></div>
+        <div class="p4-stripe-rail p4-stripe-right absolute top-0 bottom-0 right-0 w-[70px] opacity-[0.07]"></div>
+        <!-- 7 drifting outline CRT TVs with V antennas -->
+        <div class="absolute inset-0">
+          {[
+            { left: '9%', top: '16%', delay: '0s', dur: '16s' },
+            { left: '82%', top: '12%', delay: '-4s', dur: '19s' },
+            { left: '14%', top: '54%', delay: '-8s', dur: '17s' },
+            { left: '85%', top: '46%', delay: '-2s', dur: '20s' },
+            { left: '6%', top: '80%', delay: '-11s', dur: '18s' },
+            { left: '76%', top: '74%', delay: '-6s', dur: '15s' },
+            { left: '48%', top: '8%', delay: '-9s', dur: '21s' },
+          ].map((tv) => (
+            <svg
+              viewBox="0 0 48 44"
+              class="p4-tv-float absolute h-11 w-12 stroke-yellow-400/20 fill-none"
+              style={`left: ${tv.left}; top: ${tv.top}; animation-duration: ${tv.dur}; animation-delay: ${tv.delay};`}
+              stroke-width="1.2"
+            >
+              <path d="M16 12 L10 3 M32 12 L38 3" />
+              <rect x="6" y="12" width="36" height="26" rx="4" />
+              <rect x="10" y="16" width="22" height="18" rx="2" />
+              <circle cx="36.5" cy="20" r="1.5" />
+              <circle cx="36.5" cy="26" r="1.5" />
+            </svg>
+          ))}
+        </div>
+        <!-- Bottom-right detective silhouette with yellow rim & pulsing eyes -->
+        <div class="p4-detective hidden lg:block absolute bottom-0 right-16 w-48 h-64 opacity-[0.14]">
+          <svg viewBox="0 0 180 240" class="h-full w-full" fill="none">
+            <!-- Cap + brim -->
+            <path d="M62 42 C66 24, 108 22, 116 38 L128 42 L60 46 Z" fill="#09090b" />
+            <!-- Head / profile -->
+            <path d="M66 44 L112 44 C114 62, 104 76, 88 78 C72 78, 64 62, 66 44 Z" fill="#09090b" />
+            <!-- High trench-coat collar & shoulders -->
+            <path d="M48 86 L68 72 L90 84 L114 70 L134 88 L148 240 L32 240 Z" fill="#09090b" />
+            <!-- Narrow pulsing yellow eyes -->
+            <rect x="77" y="56" width="8" height="2.5" rx="1" fill="#facc15" class="p4-eye-pulse" />
+            <rect x="93" y="56" width="8" height="2.5" rx="1" fill="#facc15" class="p4-eye-pulse" />
+          </svg>
+        </div>
+      </div>
     </div>
 
-    <main class="relative z-10 max-w-[600px] mx-auto px-6 pt-20 pb-16 sm:pt-28">
+    <!-- CRT scanlines overlay (OK Computer mode) -->
+    <div
+      class="crt-scanlines pointer-events-none fixed inset-0 z-40 opacity-0 transition-opacity duration-500"
+      aria-hidden="true"
+    ></div>
+
+    <!-- CRT transition overlay -->
+    <div
+      id="crt-overlay"
+      class="pointer-events-none fixed inset-0 z-50 flex items-center justify-center opacity-0"
+      aria-hidden="true"
+    >
+      <div id="crt-backdrop" class="absolute inset-0 bg-[#050811] opacity-0"></div>
+      <div id="crt-glitch" class="crt-glitch-noise absolute inset-0 opacity-0"></div>
+      <div
+        id="crt-beam"
+        class="relative z-10 h-full w-full origin-center bg-gradient-to-b from-cyan-200/90 via-white to-cyan-300/90 opacity-0 shadow-[0_0_32px_rgba(103,232,249,0.95)]"
+      ></div>
+      <div
+        id="crt-terminal"
+        class="pointer-events-none absolute z-20 hidden font-mono text-xs tracking-widest text-cyan-300 drop-shadow-[0_0_8px_rgba(103,232,249,0.8)]"
+      >
+        <span>&gt; TUNING: OSTRAVA_97 [OK_COMPUTER]...</span>
+        <span class="ml-1 inline-block h-3.5 w-2 animate-pulse bg-cyan-300 align-middle"></span>
+      </div>
+    </div>
+
+    <!-- OK Computer mode exit pill -->
+    <div id="ok-banner" class="fixed top-4 left-1/2 z-50 hidden -translate-x-1/2">
+      <button
+        id="ok-exit-btn"
+        type="button"
+        data-click
+        class="rounded-full border border-teal-400/40 bg-[#090D16]/90 px-3 py-1 font-mono text-[11px] text-teal-300 backdrop-blur-md transition-colors hover:border-cyan-400 hover:bg-cyan-950/50"
+      >
+        [OK COMPUTER // OSTRAVA_97 • EXIT]
+      </button>
+    </div>
+
+    <!-- Fog transition -->
+    <div
+      id="sh-fog-overlay"
+      class="pointer-events-none fixed inset-0 z-50 flex items-center justify-center bg-zinc-900/85 opacity-0 backdrop-blur-md"
+      aria-hidden="true"
+    >
+      <div class="sh-fog-veil absolute inset-0"></div>
+    </div>
+
+    <!-- Silent Hill: Otherworld Mode exit pill -->
+    <div id="sh-banner" class="fixed top-4 left-1/2 z-50 hidden -translate-x-1/2">
+      <button
+        id="sh-exit-btn"
+        type="button"
+        data-click
+        class="rounded-full border border-red-900/60 bg-zinc-950/90 px-3 py-1 font-mono text-[11px] text-zinc-300 backdrop-blur-md transition-colors hover:border-red-600/70 hover:text-red-400"
+      >
+        [OTHERWORLD // PORUBA • EXIT]
+      </button>
+    </div>
+
+    <!-- Persona 4: Midnight Channel TV static flash overlay -->
+    <div
+      id="p4-tv-overlay"
+      class="p4-tv-noise pointer-events-none fixed inset-0 z-50 opacity-0"
+      aria-hidden="true"
+    ></div>
+
+    <!-- Persona 4: Midnight Channel exit pill -->
+    <div id="p4-banner" class="fixed top-4 left-1/2 z-50 hidden -translate-x-1/2">
+      <button
+        id="p4-exit-btn"
+        type="button"
+        data-click
+        class="rounded-full border border-yellow-400/60 bg-zinc-950/90 px-3 py-1 font-mono text-[11px] text-yellow-300 backdrop-blur-md transition-colors hover:border-yellow-300 hover:bg-yellow-950/50"
+      >
+        [MIDNIGHT CHANNEL • EXIT]
+      </button>
+    </div>
+
+    <!-- Persona 4: Top-right Date & Weather HUD -->
+    <div
+      id="p4-hud"
+      class="pointer-events-none fixed top-4 right-4 z-40 hidden flex-col items-end gap-1 select-none"
+      aria-hidden="true"
+    >
+      <div class="-skew-x-6 border-2 border-yellow-400 bg-[#09090B]/95 px-2.5 py-1 shadow-[3px_3px_0_#facc15]">
+        <span id="p4-hud-date" class="font-mono text-xs font-bold tracking-wider text-yellow-300">
+          --/-- ---
+        </span>
+      </div>
+      <div class="-skew-x-6 border border-yellow-400/70 bg-[#09090B]/90 px-2 py-0.5">
+        <span id="p4-hud-period" class="font-mono text-[10px] tracking-wider text-yellow-200/90">
+          MIDNIGHT • FOGGY // TV
+        </span>
+      </div>
+    </div>
+
+    <!-- Persona 4: Narrator Dialog Box -->
+    <div
+      id="p4-dialog"
+      role="status"
+      aria-live="polite"
+      class="pointer-events-none fixed bottom-5 left-1/2 z-50 w-[min(92vw,34rem)] -translate-x-1/2 translate-y-4 opacity-0 transition-all duration-300"
+    >
+      <div class="-skew-x-3 cursor-pointer border-2 border-yellow-400 bg-[#09090B]/95 p-3.5 shadow-[0_0_0_2px_#09090b,4px_4px_0_#facc15]">
+        <span class="-mt-6 mb-1.5 inline-block bg-yellow-400 px-2 py-0.5 font-mono text-[10px] font-bold tracking-wider text-zinc-950">
+          MIDNIGHT CHANNEL
+        </span>
+        <p id="p4-dialog-text" class="font-mono text-xs leading-relaxed text-zinc-100"></p>
+      </div>
+    </div>
+
+    <main class="relative z-10 mx-auto max-w-2xl px-6 sm:px-8">
       <!-- Header -->
-      <header>
-        <div class="flex flex-wrap items-center justify-between gap-2 font-mono text-xs text-zinc-500">
+      <header class="border-b border-white/[0.06] pt-16 pb-10 sm:pt-20">
+        <div class="flex flex-wrap items-center justify-between gap-2 font-mono text-xs text-[#71717A]">
           <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
             <span class="inline-flex items-center gap-2">
               <span class="relative flex h-1.5 w-1.5">
-                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/60"></span>
+                <span class="absolute inline-flex h-full w-full animate-ping motion-reduce:animate-none rounded-full bg-emerald-400/60"></span>
                 <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
               </span>
-              <time id="clock" class="tabular-nums text-zinc-300">--:--:--</time>
+              <time id="clock" class="tabular-nums text-zinc-200">--:--:--</time>
             </span>
-            <span class="text-zinc-700">/</span>
+            <span class="text-zinc-600">/</span>
             <span data-i18n="status">Ostrava, CZ • Volný přístup na trh práce v ČR</span>
           </div>
 
           <div
             role="group"
             aria-label="Language switcher"
-            class="flex items-center gap-1 font-mono text-[11px] text-zinc-600"
+            class="flex items-center gap-0.5 font-mono text-[11px] text-zinc-500"
           >
             <button
               type="button"
               data-lang="en"
               data-click
               aria-pressed="true"
-              class="text-zinc-100 transition-colors hover:text-zinc-100"
+              class="rounded px-1.5 py-1 text-zinc-100 transition-colors hover:text-zinc-100"
             >
               EN
             </button>
@@ -92,7 +322,7 @@ const filters = [
               data-lang="cz"
               data-click
               aria-pressed="false"
-              class="text-zinc-500 transition-colors hover:text-zinc-100"
+              class="rounded px-1.5 py-1 text-zinc-400 transition-colors hover:text-zinc-100"
             >
               CZ
             </button>
@@ -102,21 +332,37 @@ const filters = [
               data-lang="ru"
               data-click
               aria-pressed="false"
-              class="text-zinc-500 transition-colors hover:text-zinc-100"
+              class="rounded px-1.5 py-1 text-zinc-400 transition-colors hover:text-zinc-100"
             >
               RU
             </button>
+            <kbd
+              title="Press L to switch language"
+              class="ml-1 hidden sm:inline-block rounded border border-zinc-800 bg-zinc-900/80 px-1 py-0.5 font-mono text-[10px] leading-none text-zinc-400"
+            >
+              L
+            </kbd>
           </div>
         </div>
 
-        <h1 class="mt-8 text-3xl font-semibold tracking-tight text-zinc-100">
-          <span data-i18n="greeting">Hey, I'm Aidar S.</span> <span class="wave" aria-hidden="true">👋</span>
+        <h1 class="mt-8 text-3xl font-semibold tracking-tight text-[#F4F4F5]">
+          <span data-i18n="greeting">Hey, I'm Aidar S.</span>
         </h1>
 
-        <p data-i18n="bio" class="mt-4 text-[15px] leading-relaxed text-zinc-400">
-          I study Informatics in Economics at VŠB-TUO. I like turning messy data into clean Python
-          pipelines, poking around with low-level C, and figuring out how business numbers actually
-          work.
+        <p data-i18n="bio" class="mt-4 min-h-[4.5rem] text-[15px] leading-relaxed text-[#A1A1AA]">
+          Second-year Informatics in Economics student at VŠB-TUO. Mostly writing Python scripts to
+          clean data, learning C, and working through corporate finance numbers.
+        </p>
+
+        <!-- Live status -->
+        <p class="mt-3 flex items-center gap-2 font-mono text-xs text-[#71717A]">
+          <span class="relative flex h-1.5 w-1.5 shrink-0">
+            <span class="absolute inline-flex h-full w-full animate-ping motion-reduce:animate-none rounded-full bg-amber-400/60"></span>
+            <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-amber-400"></span>
+          </span>
+          <span data-i18n="currently">
+            Currently: working on a Python project & trying to survive Year 2 of Informatics in Economics at VŠB
+          </span>
         </p>
 
         <nav aria-label="Contact links" class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
@@ -163,7 +409,7 @@ const filters = [
             id="sound-toggle"
             type="button"
             aria-pressed="true"
-            class="ml-auto font-mono text-xs text-zinc-600 transition-colors hover:text-zinc-300"
+            class="ml-auto font-mono text-xs text-zinc-500 transition-colors hover:text-zinc-200"
           >
             sound: on
           </button>
@@ -171,14 +417,22 @@ const filters = [
       </header>
 
       <!-- Widgets -->
-      <section aria-label="Toys" class="mt-14 grid grid-cols-1 gap-3 sm:grid-cols-2 items-start">
+      <section aria-label="Toys" class="border-b border-white/[0.06] py-10">
+        <div class="grid grid-cols-1 gap-3 md:grid-cols-2 items-stretch">
         <!-- Radiohead player -->
-        <div id="player" class="flex flex-col justify-between gap-3 rounded-xl border border-zinc-800/70 bg-zinc-900/50 p-3.5 backdrop-blur-md">
+        <div
+          id="player"
+          class="flex flex-col justify-between gap-3 rounded-xl border border-white/[0.08] bg-[#121417] p-3.5 shadow-lg shadow-black/40"
+        >
           <audio id="radio-audio" preload="none"></audio>
 
           <div class="flex items-center gap-3.5">
             <!-- Left: Black vinyl with iTunes album artwork center label -->
-            <div class="vinyl relative h-12 w-12 shrink-0 rounded-full" aria-hidden="true">
+            <div
+              id="vinyl-disc"
+              class="vinyl relative h-12 w-12 shrink-0 cursor-pointer rounded-full transition-shadow duration-300 hover:shadow-[0_0_14px_rgba(103,232,249,0.28)]"
+              aria-hidden="true"
+            >
               <div class="in-rainbows-label absolute inset-[26%] overflow-hidden rounded-full">
                 <img
                   id="vinyl-artwork"
@@ -192,13 +446,14 @@ const filters = [
             <!-- Middle: Status + 3-bar EQ + Track title -->
             <div class="min-w-0 flex-1">
               <div class="flex items-center gap-2">
-                <span class="truncate font-mono text-[11px] text-zinc-500">
-                  NOW SPINNING // CODING VIBE
+                <span class="truncate text-xs text-zinc-500">
+                  Now spinning
                 </span>
                 <span id="eq" class="flex h-3 shrink-0 items-end gap-[2px]" aria-hidden="true">
                   <span class="eq-bar block w-[2px] rounded-full bg-amber-400/90"></span>
                   <span class="eq-bar block w-[2px] rounded-full bg-orange-400/90"></span>
                   <span class="eq-bar block w-[2px] rounded-full bg-sky-400/90"></span>
+                  <span class="eq-bar block w-[2px] rounded-full bg-emerald-400/90"></span>
                 </span>
               </div>
 
@@ -210,7 +465,7 @@ const filters = [
                 >
                   Radiohead — Weird Fishes / Arpeggi
                 </span>
-                <span id="track-meta" class="block truncate font-mono text-[10.5px] text-zinc-500">
+                <span id="track-meta" class="block truncate font-mono text-[10.5px] text-zinc-400">
                   Loading iTunes preview...
                 </span>
               </div>
@@ -218,169 +473,496 @@ const filters = [
           </div>
 
           <!-- Thin progress bar -->
-          <div class="space-y-1.5">
+          <div class="space-y-1">
             <div
               id="progress-track"
               role="progressbar"
               aria-label="Track progress"
-              class="h-1 w-full cursor-pointer overflow-hidden rounded-full bg-zinc-800"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="0"
+              class="cursor-pointer py-2"
             >
-              <div id="progress-bar" class="h-full w-0 rounded-full bg-amber-400/90 transition-[width] duration-150"></div>
+              <div class="h-1 w-full overflow-hidden rounded-full bg-zinc-800">
+                <div id="progress-bar" class="h-full w-0 rounded-full bg-amber-400/90 transition-[width] duration-150"></div>
+              </div>
             </div>
 
-            <div class="flex items-center justify-between gap-2">
-              <div class="flex items-center gap-2 font-mono text-[10.5px] text-zinc-500">
-                <span id="track-time">0:00 / 0:30</span>
-                <span class="text-zinc-700">•</span>
-                <span id="track-counter">1/3</span>
+            <div class="space-y-2">
+              <div class="flex items-center justify-between font-mono text-[10px] text-zinc-400">
+                <span id="track-time" class="whitespace-nowrap">0:00 / 0:30</span>
+                <span id="track-counter" class="whitespace-nowrap text-zinc-500">1/3</span>
               </div>
 
-              <div class="flex shrink-0 items-center gap-1">
-                <button
-                  id="prev-btn"
-                  type="button"
-                  data-click
-                  aria-label="Previous track"
-                  class="inline-flex h-7 w-7 items-center justify-center rounded-md border border-zinc-800 bg-zinc-950/60 text-zinc-400 transition-colors hover:border-zinc-700 hover:text-zinc-100"
+              <div class="flex items-center justify-between gap-1.5">
+                <kbd
+                  title="Press M to play/pause"
+                  class="hidden sm:inline-block rounded border border-zinc-800 bg-zinc-950/70 px-1 py-0.5 font-mono text-[10px] leading-none text-zinc-400"
                 >
-                  <svg viewBox="0 0 16 16" class="h-3 w-3" fill="currentColor" aria-hidden="true">
-                    <path d="M3 3h1.5v10H3V3zm2.5 5l7-4.5v9L5.5 8z" />
-                  </svg>
-                </button>
+                  M
+                </kbd>
+                <div class="flex items-center gap-1.5 ml-auto">
+                  <button
+                    id="prev-btn"
+                    type="button"
+                    data-click
+                    aria-label="Previous track"
+                    class="inline-flex h-7 w-7 items-center justify-center rounded-md border border-zinc-800 bg-zinc-950/60 text-zinc-400 transition-colors hover:border-zinc-700 hover:text-zinc-100"
+                  >
+                    <svg viewBox="0 0 16 16" class="h-3 w-3" fill="currentColor" aria-hidden="true">
+                      <path d="M3 3h1.5v10H3V3zm2.5 5l7-4.5v9L5.5 8z" />
+                    </svg>
+                  </button>
 
-                <button
-                  id="play-btn"
-                  type="button"
-                  data-click
-                  aria-pressed="false"
-                  aria-label="Play"
-                  class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-zinc-100 text-zinc-900 transition-colors hover:bg-white"
-                >
-                  <svg id="icon-play" viewBox="0 0 16 16" class="h-3 w-3 translate-x-[0.5px]" fill="currentColor" aria-hidden="true">
-                    <path d="M4 2.5v11l9-5.5z" />
-                  </svg>
-                  <svg id="icon-pause" viewBox="0 0 16 16" class="hidden h-3 w-3" fill="currentColor" aria-hidden="true">
-                    <path d="M4 2.5h3v11H4zM9 2.5h3v11H9z" />
-                  </svg>
-                </button>
+                  <button
+                    id="play-btn"
+                    type="button"
+                    data-click
+                    aria-pressed="false"
+                    aria-label="Play (M)"
+                    class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 text-zinc-900 transition-colors hover:bg-white"
+                  >
+                    <svg id="icon-play" viewBox="0 0 16 16" class="h-3.5 w-3.5 translate-x-[0.5px]" fill="currentColor" aria-hidden="true">
+                      <path d="M4 2.5v11l9-5.5z" />
+                    </svg>
+                    <svg id="icon-pause" viewBox="0 0 16 16" class="hidden h-3.5 w-3.5" fill="currentColor" aria-hidden="true">
+                      <path d="M4 2.5h3v11H4zM9 2.5h3v11H9z" />
+                    </svg>
+                  </button>
 
-                <button
-                  id="next-btn"
-                  type="button"
-                  data-click
-                  aria-label="Next track"
-                  class="inline-flex h-7 w-7 items-center justify-center rounded-md border border-zinc-800 bg-zinc-950/60 text-zinc-400 transition-colors hover:border-zinc-700 hover:text-zinc-100"
-                >
-                  <svg viewBox="0 0 16 16" class="h-3 w-3" fill="currentColor" aria-hidden="true">
-                    <path d="M11.5 3H13v10h-1.5V3zM3.5 12.5v-9l7 4.5-7 4.5z" />
-                  </svg>
-                </button>
+                  <button
+                    id="next-btn"
+                    type="button"
+                    data-click
+                    aria-label="Next track"
+                    class="inline-flex h-7 w-7 items-center justify-center rounded-md border border-zinc-800 bg-zinc-950/60 text-zinc-400 transition-colors hover:border-zinc-700 hover:text-zinc-100"
+                  >
+                    <svg viewBox="0 0 16 16" class="h-3 w-3" fill="currentColor" aria-hidden="true">
+                      <path d="M11.5 3H13v10h-1.5V3zM3.5 12.5v-9l7 4.5-7 4.5z" />
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Pixel filter toy -->
-        <div class="flex flex-col gap-3 rounded-xl border border-zinc-800/70 bg-zinc-900/40 p-4 backdrop-blur-md">
+        <div
+          id="pixel-widget"
+          class="flex flex-col gap-3 rounded-xl border border-white/[0.08] bg-[#121417] p-4 shadow-lg shadow-black/40 md:col-span-2 md:order-3"
+        >
           <div class="flex items-center justify-between">
-            <span data-i18n="pixelFilter" class="text-xs text-zinc-500">Pixel filter</span>
-            <code id="filter-op" class="font-mono text-[11px] text-zinc-600">normal()</code>
+            <span data-i18n="pixelFilter" class="text-xs text-[#A1A1AA]">Pixel filter</span>
+            <code id="filter-op" class="font-mono text-[11px] text-[#71717A]">normal()</code>
           </div>
 
-          <canvas
-            id="filter-canvas"
-            width="48"
-            height="30"
-            class="pixelated aspect-[48/30] w-full rounded-md"
-            aria-label="Pixel art sunset processed by the selected filter"
-          ></canvas>
-
-          <div class="flex items-center gap-1" role="group" aria-label="Filter">
-            {filters.map((f) => (
-              <button
-                type="button"
-                data-filter={f.id}
-                data-i18n={f.i18n}
-                data-click
-                class="rounded-md px-2 py-1 text-xs text-zinc-400 transition-colors hover:text-zinc-100"
+          <div class="w-full max-w-[440px] mx-auto flex flex-col gap-3">
+            <div
+              id="pixel-stage"
+              class="relative aspect-[2/1] w-full cursor-pointer overflow-hidden rounded-md"
+            >
+              <canvas
+                id="filter-canvas"
+                width="280"
+                height="140"
+                class="pixelated block w-full h-auto aspect-[2/1] rounded-md transition-opacity duration-500"
+                aria-label="Pixel art sunset processed by the selected filter"
+              ></canvas>
+              <canvas
+                id="ostrava-canvas"
+                width="280"
+                height="140"
+                class="pixelated pointer-events-none absolute inset-0 block w-full h-auto aspect-[2/1] rounded-md opacity-0 transition-opacity duration-500"
+                aria-label="8-bit animated night scene of Forum Nová Karolina in Ostrava"
+              ></canvas>
+              <canvas
+                id="poruba-canvas"
+                width="280"
+                height="140"
+                class="pixelated pointer-events-none absolute inset-0 block w-full h-auto aspect-[2/1] rounded-md opacity-0 transition-opacity duration-500"
+                aria-label="8-bit animated foggy scene of VŠB-TUO Rectorate in Ostrava-Poruba"
+              ></canvas>
+              <canvas
+                id="radnice-canvas"
+                width="280"
+                height="140"
+                class="pixelated pointer-events-none absolute inset-0 block w-full h-auto aspect-[2/1] rounded-md opacity-0 transition-opacity duration-500"
+                aria-label="8-bit animated Midnight Channel scene of Nová radnice Ostrava"
+              ></canvas>
+              <span
+                id="dov-caption"
+                class="pointer-events-none absolute bottom-1.5 left-2 rounded bg-[#090D16]/75 px-1.5 py-0.5 font-mono text-[9px] leading-none tracking-wider text-cyan-300/90 opacity-0 transition-opacity duration-500"
               >
-                {f.label}
-              </button>
-            ))}
+                LOC: KAROLINA_SQ // 1997
+              </span>
+              <span
+                id="poruba-caption"
+                class="pointer-events-none absolute bottom-1.5 left-2 rounded bg-zinc-950/80 px-1.5 py-0.5 font-mono text-[9px] leading-none tracking-wider text-zinc-300/90 opacity-0 transition-opacity duration-500"
+              >
+                PORUBA // FOG: 96%
+              </span>
+              <span
+                id="radnice-caption"
+                class="pointer-events-none absolute bottom-1.5 left-2 rounded bg-zinc-950/85 px-1.5 py-0.5 font-mono text-[9px] leading-none tracking-wider text-yellow-300 opacity-0 transition-opacity duration-500"
+              >
+                LOC: RADNICE_OV // 00:00 TV
+              </span>
+            </div>
+
+            <div class="flex items-center gap-0.5" role="group" aria-label="Filter">
+              {filters.map((f) => (
+                <button
+                  type="button"
+                  data-filter={f.id}
+                  data-i18n={f.i18n}
+                  data-click
+                  class="whitespace-nowrap rounded-md px-1.5 py-1 text-[11px] text-zinc-400 transition-colors hover:text-zinc-100"
+                >
+                  {f.label}
+                </button>
+              ))}
+            </div>
+
+            <input
+              id="filter-intensity"
+              type="range"
+              min="0"
+              max="100"
+              value="100"
+              aria-label="Filter intensity"
+              class="range w-full"
+            />
+          </div>
+        </div>
+
+        <!-- Log sanitizer toy -->
+        <div
+          id="log-sanitizer"
+          class="flex flex-col justify-between gap-3 rounded-xl border border-white/[0.08] bg-[#121417] p-4 shadow-lg shadow-black/40 md:order-2"
+        >
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-xs text-[#A1A1AA]">Log sanitizer</span>
+            <button
+              id="p4-secret-indicator"
+              type="button"
+              data-click
+              title="Midnight Channel // 00:00"
+              class="group inline-flex items-center gap-1.5 rounded px-1 py-0.5 font-mono text-[10px] text-[#71717A] transition-colors hover:text-yellow-300"
+            >
+              <span class="p4-dot h-1.5 w-1.5 rounded-full bg-zinc-600 transition-colors group-hover:bg-[#FACC15]"></span>
+              <span class="p4-glitch-label">00:00 // --</span>
+            </button>
           </div>
 
-          <input
-            id="filter-intensity"
-            type="range"
-            min="0"
-            max="100"
-            value="100"
-            aria-label="Filter intensity"
-            class="range w-full"
-          />
+          <div
+            id="log-terminal"
+            class="relative flex flex-1 flex-col justify-center space-y-1.5 rounded-md border border-white/[0.06] bg-zinc-950/75 p-2.5 font-mono text-[10.5px] leading-snug"
+          >
+            <code id="log-op" class="pointer-events-none absolute right-2 top-1.5 font-mono text-[9px] text-zinc-600">raw.csv</code>
+            <div data-log-line class="truncate text-zinc-400">08:01  IN   [0x01]</div>
+            <div data-log-line class="truncate text-red-400/80">12:30  ERR_NULL</div>
+            <div data-log-line class="truncate text-amber-400/80">13:15  IN   (dup)</div>
+            <div data-log-line class="truncate text-zinc-400">17:45  OUT  [0x01]</div>
+          </div>
+
+          <div class="flex items-center justify-between gap-1 pt-0.5">
+            <span id="log-result" class="whitespace-nowrap font-mono text-[9.5px] tracking-tight text-zinc-500">2 anomalies</span>
+            <button
+              id="log-clean-btn"
+              type="button"
+              data-click
+              class="shrink-0 whitespace-nowrap rounded-md border border-white/[0.1] bg-zinc-950/70 px-1.5 py-0.5 font-mono text-[10px] text-zinc-200 transition-colors hover:border-zinc-500 hover:bg-zinc-900"
+            >
+              clean()
+            </button>
+          </div>
+        </div>
+        </div>
+      </section>
+
+      <!-- Spec Sheet (Stack & Now) -->
+      <section aria-label="Specifications" class="border-b border-white/[0.06] py-8">
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+          <div>
+            <h2 data-i18n="stackLabel" class="mb-2.5 font-mono text-xs uppercase tracking-wider text-[#71717A]">
+              Stack:
+            </h2>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="rounded border border-white/[0.08] bg-[#121417] px-2 py-1 font-mono text-[11px] text-zinc-300">Python / Pandas</span>
+              <span class="rounded border border-white/[0.08] bg-[#121417] px-2 py-1 font-mono text-[11px] text-zinc-300">C / Memory</span>
+              <span class="rounded border border-white/[0.08] bg-[#121417] px-2 py-1 font-mono text-[11px] text-zinc-300">SQL / 3NF</span>
+              <span class="rounded border border-white/[0.08] bg-[#121417] px-2 py-1 font-mono text-[11px] text-zinc-300">Financial Analysis</span>
+            </div>
+          </div>
+
+          <div>
+            <h2 data-i18n="nowLabel" class="mb-2.5 font-mono text-xs uppercase tracking-wider text-[#71717A]">
+              Now:
+            </h2>
+            <ul class="space-y-1.5 font-mono text-xs text-[#A1A1AA]">
+              <li data-i18n="now1">Year 2, Informatics in Economics at VŠB-TUO</li>
+              <li data-i18n="now2">Ostrava, looking for a data or dev internship</li>
+              <li data-i18n="now3">Python ETL scripts and C tools</li>
+            </ul>
+          </div>
         </div>
       </section>
 
       <!-- Projects -->
-      <section aria-labelledby="projects-heading" class="mt-16">
-        <h2 id="projects-heading" data-i18n="projects" class="mb-3 text-sm font-medium text-zinc-500">Projects</h2>
+      <section aria-labelledby="projects-heading" class="border-b border-white/[0.06] py-10">
+        <h2 id="projects-heading" data-i18n="projects" class="mb-3 font-mono text-xs uppercase tracking-wider text-[#71717A]">Projects</h2>
 
         <ul class="border-t border-zinc-800/80">
-          {projects.map((project) => (
-            <li class="border-b border-zinc-800/80">
-              <div class="group -mx-3 rounded-lg px-3 py-4 transition-all duration-200 hover:translate-x-1 hover:bg-white/[0.025]">
-                <div class="flex items-baseline justify-between gap-4">
-                  <div class="flex min-w-0 flex-wrap items-baseline gap-x-2.5 gap-y-1">
-                    <h3 class="text-[15px] font-medium text-zinc-200 transition-colors group-hover:text-zinc-50">
-                      {project.data.title}
-                    </h3>
-                    <span class="font-mono text-xs text-zinc-500">{project.data.stack.join(' · ')}</span>
-                    {project.data.status && (
-                      <span data-i18n="statusInProgress" class="font-mono text-[11px] text-amber-400/90">[{project.data.status}]</span>
-                    )}
-                  </div>
-                  <a
-                    href={project.data.github}
-                    target="_blank"
-                    rel="noopener noreferrer nofollow"
-                    data-click
-                    class="shrink-0 text-xs text-zinc-500 transition-colors hover:text-zinc-100"
-                  >
-                    GitHub ↗
-                  </a>
-                </div>
-                <p
-                  data-i18n={`proj.${project.slug}`}
-                  class="mt-1.5 text-sm leading-relaxed text-zinc-500 transition-colors group-hover:text-zinc-400"
+          {projects.map((project) => {
+            const payload = JSON.stringify({
+              slug: project.slug,
+              title: project.data.title,
+              stack: project.data.stack,
+              status: project.data.status,
+              description: project.data.description,
+              detailLabel: project.data.detailLabel,
+              detailLines: project.data.detailLines,
+              github: project.data.github,
+            });
+            return (
+              <li class="border-b border-zinc-800/80">
+                <div
+                  role="button"
+                  tabindex="0"
+                  data-project-trigger
+                  data-project={payload}
+                  data-click
+                  class="group -mx-3 cursor-pointer rounded-lg px-3 py-4 transition-all duration-300 hover:bg-white/[0.02]"
                 >
-                  {project.data.description}
-                </p>
-              </div>
-            </li>
-          ))}
+                  <div class="flex items-baseline justify-between gap-4">
+                    <div class="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1.5">
+                      <h3 class="text-[15px] font-medium text-zinc-200 transition-all duration-300 group-hover:translate-x-1 group-hover:text-zinc-50">
+                        {project.data.title}
+                      </h3>
+                      <div class="flex flex-wrap items-center gap-1">
+                        {project.data.stack.map((tech) => (
+                          <span class="rounded border border-white/[0.07] bg-white/[0.03] px-1.5 py-0.5 font-mono text-[11px] leading-none text-zinc-400 transition-colors duration-300 group-hover:border-white/[0.16] group-hover:text-zinc-200">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                      {project.data.status && (
+                        <span data-i18n="statusInProgress" class="font-mono text-[11px] text-amber-400/90">[{project.data.status}]</span>
+                      )}
+                    </div>
+                    <a
+                      href={project.data.github}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      data-click
+                      class="shrink-0 text-xs text-zinc-400 transition-all duration-300 hover:text-zinc-100"
+                    >
+                      GitHub ↗
+                    </a>
+                  </div>
+                  <p
+                    data-i18n={`proj.${project.slug}`}
+                    class="mt-1.5 text-sm leading-relaxed text-zinc-400 transition-colors group-hover:text-zinc-300"
+                  >
+                    {project.data.description}
+                  </p>
+                </div>
+              </li>
+            );
+          })}
         </ul>
       </section>
 
-      <!-- Stack & languages -->
-      <footer class="mt-16 space-y-3 text-sm">
-        <div class="flex flex-wrap items-baseline gap-1.5">
-          <span data-i18n="stackLabel" class="mr-1.5 font-medium text-zinc-300">Stack:</span>
-          {stack.map((item) => (
-            <span class="rounded-md bg-zinc-800/50 px-2 py-0.5 text-xs text-zinc-400">{item}</span>
-          ))}
+      <!-- Signal Composer -->
+      <section aria-labelledby="composer-heading" class="border-b border-white/[0.06] py-8">
+        <div
+          id="signal-composer"
+          class="space-y-3 rounded-xl border border-white/[0.08] bg-[#121417] p-4 shadow-lg shadow-black/40 transition-colors duration-300"
+        >
+          <div class="flex items-center justify-between gap-2">
+            <span id="composer-heading" class="font-mono text-xs text-zinc-200">Quick message</span>
+            <span class="inline-flex items-center gap-1.5 font-mono text-[11px] text-zinc-500">
+              mailto / tg
+            </span>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-1.5" role="group" aria-label="Message presets">
+            <button
+              type="button"
+              data-composer-preset="internship"
+              data-click
+              aria-pressed="false"
+              class="rounded border border-white/[0.08] bg-white/[0.02] px-2 py-0.5 font-mono text-[11px] text-zinc-400 transition-colors hover:border-zinc-600 hover:text-zinc-200"
+            >
+              [Internship / Role]
+            </button>
+            <button
+              type="button"
+              data-composer-preset="project"
+              data-click
+              aria-pressed="false"
+              class="rounded border border-white/[0.08] bg-white/[0.02] px-2 py-0.5 font-mono text-[11px] text-zinc-400 transition-colors hover:border-zinc-600 hover:text-zinc-200"
+            >
+              [Project / Tech]
+            </button>
+            <button
+              type="button"
+              data-composer-preset="easter"
+              data-click
+              aria-pressed="false"
+              class="rounded border border-white/[0.08] bg-white/[0.02] px-2 py-0.5 font-mono text-[11px] text-zinc-400 transition-colors hover:border-zinc-600 hover:text-zinc-200"
+            >
+              [Found Easter Egg]
+            </button>
+          </div>
+
+          <textarea
+            id="composer-input"
+            rows="3"
+            placeholder="Pick a preset or type your message..."
+            aria-label="Message text"
+            class="w-full resize-none rounded-lg border border-white/[0.08] bg-black/40 p-2.5 font-mono text-xs leading-relaxed text-zinc-300 placeholder:text-zinc-600 focus:border-zinc-500 focus:outline-none"
+          ></textarea>
+
+          <div class="flex flex-wrap items-center justify-between gap-2 pt-0.5">
+            <div class="flex flex-wrap items-center gap-2">
+              <button
+                id="composer-tg-btn"
+                type="button"
+                data-click
+                class="rounded-md border border-white/[0.1] bg-zinc-950/70 px-2.5 py-1 font-mono text-[11px] text-zinc-200 transition-colors hover:border-zinc-500 hover:bg-zinc-900"
+              >
+                via Telegram ↗
+              </button>
+              <button
+                id="composer-mail-btn"
+                type="button"
+                data-click
+                class="rounded-md border border-white/[0.1] bg-zinc-950/70 px-2.5 py-1 font-mono text-[11px] text-zinc-200 transition-colors hover:border-zinc-500 hover:bg-zinc-900"
+              >
+                via Mail ↗
+              </button>
+            </div>
+
+            <button
+              id="composer-copy-btn"
+              type="button"
+              data-click
+              class="rounded-md border border-white/[0.08] bg-white/[0.02] px-2.5 py-1 font-mono text-[11px] text-zinc-400 transition-colors hover:border-zinc-600 hover:text-zinc-200"
+            >
+              copy text
+            </button>
+          </div>
         </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="py-10 space-y-3 text-sm">
         <div class="flex flex-wrap items-baseline gap-1.5">
           <span data-i18n="languagesLabel" class="mr-1.5 font-medium text-zinc-300">Languages:</span>
           {languages.map((item) => (
-            <span data-i18n={item.key} class="rounded-md bg-zinc-800/50 px-2 py-0.5 text-xs text-zinc-400">
+            <span data-i18n={item.key} class="rounded border border-white/[0.07] bg-white/[0.03] px-2 py-0.5 text-xs text-zinc-400">
               {item.label}
             </span>
           ))}
         </div>
 
-        <p class="pt-10 font-mono text-xs text-zinc-600">© 2026 Aidar S.</p>
+        <p class="pt-10 font-mono text-xs text-zinc-500">© 2026 Aidar S.</p>
+        <p class="font-mono text-xs text-zinc-600">
+          frequencies:
+          <button
+            id="freq-ok-btn"
+            type="button"
+            data-click
+            class="cursor-pointer transition-colors hover:text-zinc-400"
+          >
+            [ok]
+          </button>
+          ·
+          <button
+            id="freq-sh-btn"
+            type="button"
+            data-click
+            class="cursor-pointer transition-colors hover:text-zinc-400"
+          >
+            [sh]
+          </button>
+          ·
+          <button
+            id="freq-p4-btn"
+            type="button"
+            data-click
+            class="cursor-pointer transition-colors hover:text-zinc-400"
+          >
+            [p4]
+          </button>
+        </p>
       </footer>
     </main>
+
+    <!-- Project Slide-Over Drawer -->
+    <div
+      id="project-drawer-backdrop"
+      aria-hidden="true"
+      class="pointer-events-none fixed inset-0 z-40 flex justify-end bg-black/60 opacity-0 backdrop-blur-sm transition-opacity duration-200"
+    >
+      <aside
+        id="project-drawer"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="drawer-title"
+        class="flex h-full w-full max-w-md translate-x-full flex-col justify-between border-l border-zinc-800 bg-[#0E0E11] p-6 shadow-2xl transition-transform duration-200"
+      >
+        <div>
+          <div class="flex items-start justify-between gap-4">
+            <div class="space-y-1.5">
+              <div class="flex flex-wrap items-center gap-2">
+                <span id="drawer-stack" class="font-mono text-xs text-zinc-400"></span>
+                <span id="drawer-status" class="hidden font-mono text-[11px] text-amber-400/90"></span>
+              </div>
+              <h2 id="drawer-title" class="text-lg font-semibold tracking-tight text-zinc-100"></h2>
+            </div>
+
+            <button
+              id="drawer-close"
+              type="button"
+              data-click
+              aria-label="Close project details"
+              class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-zinc-800 bg-zinc-900/60 font-mono text-sm text-zinc-400 transition-colors hover:border-zinc-700 hover:text-zinc-100"
+            >
+              ×
+            </button>
+          </div>
+
+          <p id="drawer-desc" class="mt-4 text-sm leading-relaxed text-zinc-300"></p>
+
+          <div class="mt-6 rounded-xl border border-zinc-800/80 bg-[#09090B] p-4">
+            <div class="mb-2.5 flex items-center justify-between border-b border-zinc-800/80 pb-2">
+              <span id="drawer-detail-label" class="font-mono text-[11px] uppercase tracking-wider text-zinc-400">
+                Core Logic
+              </span>
+              <span class="font-mono text-[10px] text-zinc-500">ESC to close</span>
+            </div>
+            <div id="drawer-detail-lines" class="space-y-1.5"></div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between border-t border-zinc-800/80 pt-4">
+          <a
+            id="drawer-github"
+            href="https://github.com/realxolod?tab=repositories"
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+            data-click
+            data-i18n="viewGitHub"
+            class="inline-flex items-center gap-1.5 rounded-lg bg-zinc-100 px-3.5 py-2 text-xs font-medium text-zinc-900 transition-colors hover:bg-white"
+          >
+            View on GitHub ↗
+          </a>
+        </div>
+      </aside>
+    </div>
 
     <script>
       import { initClock } from '../scripts/clock';
@@ -390,6 +972,11 @@ const filters = [
       import { initI18n } from '../scripts/i18n';
       import { initRadio } from '../scripts/radio';
       import { initFilterToy } from '../scripts/filter';
+      import { initSanitizer } from '../scripts/sanitizer';
+      import { initComposer } from '../scripts/composer';
+      import { initDrawerAndShortcuts } from '../scripts/drawer';
+      import { initEasterEggs } from '../scripts/easter';
+      import { initShBackground } from '../scripts/sh-bg';
 
       initClock();
       initClickSounds();
@@ -398,6 +985,11 @@ const filters = [
       initI18n();
       initRadio();
       initFilterToy();
+      initSanitizer();
+      initComposer();
+      initDrawerAndShortcuts();
+      initEasterEggs();
+      initShBackground();
     </script>
   </body>
 </html>
