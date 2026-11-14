@@ -149,7 +149,50 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .vinyl, .is-playing .eq-bar, .aurora-blob { animation: none; }
+  .vinyl,
+  .is-playing .eq-bar,
+  .aurora-blob,
+  .crt-scanlines::after,
+  .crt-glitch-noise,
+  .ok-scanner-line,
+  .sh-fog-watcher,
+  #sh-leg-back,
+  #sh-leg-front,
+  #sh-torso,
+  #sh-head,
+  .p4-tv-float,
+  .p4-detective,
+  .p4-eye-pulse {
+    animation: none !important;
+  }
+
+  html,
+  body,
+  h1,
+  h2,
+  h3,
+  p,
+  span,
+  a,
+  time,
+  kbd,
+  code,
+  pre,
+  section,
+  header,
+  ul,
+  li,
+  #player,
+  #pixel-widget,
+  #log-sanitizer,
+  #signal-composer,
+  #pixel-stage,
+  #log-terminal,
+  #composer-input,
+  [data-project-trigger],
+  #project-drawer {
+    transition: none !important;
+  }
 }
 
 /* Matte SVG noise overlay */
@@ -245,7 +288,46 @@
 }
 html,
 body {
-  transition: background-color 400ms ease, color 400ms ease;
+  transition:
+    background-color 650ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 550ms ease;
+}
+h1,
+h2,
+h3,
+p,
+span,
+a,
+time,
+kbd,
+code,
+pre {
+  transition:
+    color 550ms ease,
+    border-color 550ms ease,
+    background-color 550ms ease,
+    border-radius 550ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+section,
+header,
+ul,
+li {
+  transition: border-color 550ms ease;
+}
+#player,
+#pixel-widget,
+#log-sanitizer,
+#signal-composer,
+#pixel-stage,
+#log-terminal,
+#composer-input,
+[data-project-trigger],
+#project-drawer {
+  transition:
+    background-color 550ms ease,
+    border-color 550ms ease,
+    border-radius 550ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 550ms ease;
 }
 .ok-computer-mode,
 .ok-computer-mode body {
@@ -262,6 +344,8 @@ body {
 .ok-computer-mode #pixel-stage,
 .ok-computer-mode #log-terminal,
 .ok-computer-mode #composer-input,
+.ok-computer-mode [data-project-trigger],
+.ok-computer-mode [data-project-trigger] span,
 .ok-computer-mode canvas,
 .ok-computer-mode button,
 .ok-computer-mode kbd,
@@ -276,12 +360,31 @@ body {
   border-color: rgba(56, 189, 248, 0.38) !important;
   border-top-color: rgba(125, 211, 252, 0.65) !important;
 }
+.ok-computer-mode section,
+.ok-computer-mode header,
+.ok-computer-mode ul,
+.ok-computer-mode li {
+  border-color: rgba(56, 189, 248, 0.22) !important;
+}
+.ok-computer-mode [data-project-trigger]:hover {
+  background-color: rgba(56, 189, 248, 0.04) !important;
+}
+.ok-computer-mode [data-project-trigger] span.rounded {
+  border-color: rgba(56, 189, 248, 0.28) !important;
+  background-color: rgba(56, 189, 248, 0.06) !important;
+  color: #7dd3fc !important;
+}
+.ok-computer-mode #project-drawer {
+  background-color: rgba(9, 13, 22, 0.96) !important;
+  border-color: rgba(56, 189, 248, 0.35) !important;
+}
 .ok-computer-mode #composer-input {
   border-color: rgba(56, 189, 248, 0.34) !important;
   color: #bae6fd !important;
 }
 .ok-computer-mode h1,
-.ok-computer-mode h2 {
+.ok-computer-mode h2,
+.ok-computer-mode h3 {
   color: #e0f2fe !important;
 }
 .ok-computer-mode body,

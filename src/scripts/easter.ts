@@ -211,54 +211,55 @@ export function initEasterEggs() {
 
       if (nextMode === 'ok') {
         crtOverlay.style.opacity = '1';
-        crtBackdrop.style.transition = 'opacity 180ms ease-out';
-        crtBackdrop.style.opacity = '1';
+        crtBackdrop.style.transition = 'opacity 220ms ease-out';
+        crtBackdrop.style.opacity = '0.86';
 
         crtBeam.style.transition = 'none';
         crtBeam.style.transform = 'scaleY(1)';
-        crtBeam.style.opacity = '0.9';
+        crtBeam.style.opacity = '0.85';
         void crtBeam.offsetWidth;
         crtBeam.style.transition =
-          'transform 250ms cubic-bezier(0.4, 0, 0.2, 1), opacity 250ms ease-out';
+          'transform 240ms cubic-bezier(0.4, 0, 0.2, 1), opacity 240ms ease-out';
         crtBeam.style.transform = 'scaleY(0.005)';
         crtBeam.style.opacity = '1';
 
         timers.push(
           window.setTimeout(() => {
-            crtBeam.style.transition = 'opacity 120ms ease-out';
+            crtBeam.style.transition = 'opacity 140ms ease-out';
             crtBeam.style.opacity = '0.28';
-            crtGlitch.style.transition = 'opacity 100ms ease-out';
+            crtGlitch.style.transition = 'opacity 120ms ease-out';
             crtGlitch.style.opacity = '0.16';
             crtTerminal.classList.remove('hidden');
-          }, 250),
+          }, 220),
           window.setTimeout(() => {
             applyTheme('ok');
             crtTerminal.classList.add('hidden');
+            crtGlitch.style.transition = 'opacity 260ms ease-out';
             crtGlitch.style.opacity = '0';
 
             crtBeam.style.transition =
-              'transform 250ms cubic-bezier(0.16, 1, 0.3, 1), opacity 250ms ease-out';
+              'transform 420ms cubic-bezier(0.16, 1, 0.3, 1), opacity 420ms ease-out';
             crtBeam.style.transform = 'scaleY(1)';
             crtBeam.style.opacity = '0';
 
-            crtBackdrop.style.transition = 'opacity 250ms ease-out';
+            crtBackdrop.style.transition = 'opacity 480ms cubic-bezier(0.22, 1, 0.36, 1)';
             crtBackdrop.style.opacity = '0';
-          }, 550),
+          }, 420),
           window.setTimeout(() => {
             crtOverlay.style.opacity = '0';
             isTransitioning = false;
-          }, 800)
+          }, 900)
         );
       } else {
         crtOverlay.style.opacity = '1';
-        crtBackdrop.style.transition = 'opacity 160ms ease-out';
-        crtBackdrop.style.opacity = '0.88';
+        crtBackdrop.style.transition = 'opacity 180ms ease-out';
+        crtBackdrop.style.opacity = '0.82';
 
         crtBeam.style.transition = 'none';
         crtBeam.style.transform = 'scaleY(1)';
         crtBeam.style.opacity = '0.45';
         void crtBeam.offsetWidth;
-        crtBeam.style.transition = 'transform 180ms ease-in, opacity 180ms ease-out';
+        crtBeam.style.transition = 'transform 200ms ease-in, opacity 200ms ease-out';
         crtBeam.style.transform = 'scaleY(0.005)';
         crtBeam.style.opacity = '0.85';
 
@@ -266,17 +267,18 @@ export function initEasterEggs() {
           window.setTimeout(() => {
             applyTheme('normal');
 
-            crtBeam.style.transition = 'transform 220ms ease-out, opacity 220ms ease-out';
+            crtBeam.style.transition =
+              'transform 380ms cubic-bezier(0.16, 1, 0.3, 1), opacity 380ms ease-out';
             crtBeam.style.transform = 'scaleY(1)';
             crtBeam.style.opacity = '0';
 
-            crtBackdrop.style.transition = 'opacity 220ms ease-out';
+            crtBackdrop.style.transition = 'opacity 450ms cubic-bezier(0.22, 1, 0.36, 1)';
             crtBackdrop.style.opacity = '0';
-          }, 180),
+          }, 260),
           window.setTimeout(() => {
             crtOverlay.style.opacity = '0';
             isTransitioning = false;
-          }, 400)
+          }, 720)
         );
       }
       return;
